@@ -1,19 +1,23 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { OrderRepositoryInterface } from 'src/order/domain/port/order.repository.interface';
 import { CreateOrderService } from 'src/order/domain/use-case/create-order.service.service';
-import { GetOrdersByCustomerService } from 'src/order/domain/use-case/get-orders-by-customer.service';
-import { GetOrdersService } from 'src/order/domain/use-case/get-orders.service';
-import { RemoveOrderService } from 'src/order/domain/use-case/remove-order.service';
-import { SetOrderShippingAddressService } from 'src/order/domain/use-case/set-order-shipping-method.service';
+import OrderRepository from 'src/order/infrastructure/order.repository';
 @Module({
   imports: [TypeOrmModule.forFeature([])],
   controllers: [],
   providers: [
-    CreateOrderService,
-    GetOrdersService,
-    GetOrdersByCustomerService,
-    RemoveOrderService,
-    SetOrderShippingAddressService,
+    {
+      provide: 'OrderRepositoryInterface',
+      useClass: OrderPrismaRepository,
+    },
+    {
+      provide: CreateOrderService,
+      useFactory: (orderRepository: OrderRepositoryInterface) => {
+        return new CreateOrderService(orderRepository);
+      },
+      inject: ['OrderRepositoryInterface'],
+    },
   ],
 })
 export class ArticleModule {}

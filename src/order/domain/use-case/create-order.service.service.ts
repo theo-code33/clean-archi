@@ -1,9 +1,10 @@
 import { CreateOrderDto } from 'src/order/domain/dto/create-order.dto';
 import { OrderItem } from 'src/order/domain/entity/order-item.entity';
 import { Order } from 'src/order/domain/entity/order.entity';
+import { OrderRepositoryInterface } from 'src/order/domain/port/order.repository.interface';
 
 export class CreateOrderService {
-  constructor(private readonly orderRepository: OrderRepository) {}
+  constructor(private readonly orderRepository: OrderRepositoryInterface) {}
 
   async createOrder(createOrderDto: CreateOrderDto): Promise<Order> {
     const orderItems = createOrderDto.orderItems.map(

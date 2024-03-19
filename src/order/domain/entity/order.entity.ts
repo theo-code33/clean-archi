@@ -15,27 +15,27 @@ export class Order {
   }
 
   @CreateDateColumn()
-  private createdAt: Date;
+  createdAt: Date;
 
   @PrimaryGeneratedColumn()
-  private id: number;
+  id: number;
 
   @Column()
-  private price: number;
+  price: number;
 
   @Column()
-  private customerName: string;
+  customerName: string;
 
   @OneToMany(() => OrderItem, (orderItem) => orderItem.order, {
     nullable: true,
   })
-  private orderItems: OrderItem[];
+  orderItems: OrderItem[];
 
   @Column({ nullable: true })
-  private shippingAddress: string | null;
+  shippingAddress: string | null;
 
   @Column({ nullable: true })
-  private shippingAddressSetAt: Date | null;
+  shippingAddressSetAt: Date | null;
 
   getOrderTotalPrice(): number {
     return this.orderItems.reduce(

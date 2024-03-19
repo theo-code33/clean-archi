@@ -1,13 +1,14 @@
 import { Order } from '../entity/order.entity';
 import { SetOrderShippingAddressDto } from '../dto/set-order-shipping-Address.dto';
+import { OrderRepositoryInterface } from 'src/order/domain/port/order.repository.interface';
 
 export class SetOrderShippingAddressService {
-  constructor(private orderRepository: OrderRepository) {}
+  constructor(private orderRepository: OrderRepositoryInterface) {}
 
-  setOrderShippingAddress(
+  async setOrderShippingAddress(
     setOrderShippingAddressDto: SetOrderShippingAddressDto,
   ): Promise<Order> {
-    const order = this.orderRepository.findOrderById(
+    const order = await this.orderRepository.findById(
       setOrderShippingAddressDto.orderId,
     );
 

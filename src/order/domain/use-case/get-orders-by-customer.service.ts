@@ -1,10 +1,11 @@
 import { Order } from 'src/order/domain/entity/order.entity';
+import { OrderRepositoryInterface } from 'src/order/domain/port/order.repository.interface';
 
 export class GetOrdersByCustomerService {
-  constructor(private orderRepository: OrderRepository) {}
+  constructor(private orderRepository: OrderRepositoryInterface) {}
 
-  getOrdersByCustomer(customerName: string): Promise<Order[]> {
-    const orders = this.orderRepository.findOrdersByCustomerName(customerName);
+  async getOrdersByCustomer(customerName: string): Promise<Order[]> {
+    const orders = this.orderRepository.findByCustomerName(customerName);
 
     return orders;
   }

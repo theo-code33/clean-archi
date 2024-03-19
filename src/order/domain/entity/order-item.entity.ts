@@ -22,23 +22,23 @@ export class OrderItem {
   }
 
   @PrimaryGeneratedColumn('uuid')
-  private id: string;
+  id: string;
 
   @Column()
-  private productName: string;
+  productName: string;
 
   @Column({
     type: 'int',
   })
-  private quantity: number;
+  quantity: number;
 
   @Column({
     type: 'int',
   })
-  private price: number;
+  price: number;
 
   @ManyToOne(() => Order, (order) => order.orderItems)
-  private order: Order;
+  order: Order;
 
   getTotalPrice(): number {
     return this.quantity * this.price;

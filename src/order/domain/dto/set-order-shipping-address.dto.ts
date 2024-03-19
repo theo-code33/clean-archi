@@ -3,7 +3,7 @@ import { IsString, IsUUID } from 'class-validator';
 export class SetOrderShippingAddressDto {
   @IsString()
   @IsUUID()
-  orderId: number;
+  orderId: string;
 
   @IsString()
   shippingAddress: string;
