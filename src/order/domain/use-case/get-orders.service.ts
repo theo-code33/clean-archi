@@ -1,4 +1,4 @@
-import { Order } from 'aws-sdk/clients/mediaconvert';
+import { Order } from 'src/order/domain/entity/order.entity';
 
 export class GetOrdersService {
   constructor(private orderRepository: OrderRepository) {}

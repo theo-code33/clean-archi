@@ -1,6 +1,6 @@
 import { IsString, IsUUID } from 'class-validator';
 
-export class SetOrderShippingMethodDto {
+export class SetOrderShippingAddressDto {
   @IsString()
   @IsUUID()
   orderId: number;

@@ -44,7 +44,7 @@ export class Order {
     );
   }
 
-  setShippingMethod(shippingAddress: string): void {
+  setShippingAddress(shippingAddress: string): void {
     if (shippingAddress === '') {
       throw new Error('Shipping address is required');
     }

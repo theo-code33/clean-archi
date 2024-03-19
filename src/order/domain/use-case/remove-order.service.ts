@@ -2,7 +2,7 @@ export class RemoveOrderService {
   constructor(private orderRepository: OrderRepository) {}
 
   removeOrder(orderId: string): void {
-    const order = this.orderRepository.findOrder(orderId);
+    const order = this.orderRepository.findOrderById(orderId);
 
     if (!order) {
       throw new Error('Order not found');
