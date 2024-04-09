@@ -4,9 +4,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 @Entity('order-item')
 export class OrderItem {
   constructor(productName: string, quantity: number, price: number) {
-    if (productName === '') {
-      throw new Error('Product name is required');
-    }
+    this.verifyNameIsCorrect(productName);
 
     if (quantity <= 0) {
       throw new Error('Quantity must be greater than 0');
@@ -19,6 +17,12 @@ export class OrderItem {
     this.productName = productName;
     this.quantity = quantity;
     this.price = price;
+  }
+
+  verifyNameIsCorrect(productName: string) {
+    if (productName === '') {
+      throw new Error('Product name is required');
+    }
   }
 
   @PrimaryGeneratedColumn('uuid')

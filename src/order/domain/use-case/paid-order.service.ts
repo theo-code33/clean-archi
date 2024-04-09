@@ -1,19 +1,18 @@
+import { Order } from 'src/order/domain/entity/order.entity';
 import { OrderRepositoryInterface } from 'src/order/domain/port/order.repository.interface';
 
-export class RemoveOrderService {
+export class PaidOrderService {
   constructor(private orderRepository: OrderRepositoryInterface) {}
 
-  async removeOrder(orderId: string): Promise<void> {
+  async paidOrder(orderId: string): Promise<Order> {
     const order = await this.orderRepository.findById(orderId);
 
     if (!order) {
       throw new Error('Order not found');
     }
 
-    try {
-      await this.orderRepository.deleteOrder(orderId);
-    } catch (error) {
-      throw new Error('Error deleting order');
-    }
+    order.pay();
+
+    return order;
   }
 }

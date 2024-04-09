@@ -1,4 +1,5 @@
 import { OrderItem } from 'src/order/domain/entity/order-item.entity';
+import { OrderStatus } from 'src/order/domain/enum/order-status.enum';
 import {
   Column,
   CreateDateColumn,
@@ -12,6 +13,8 @@ export class Order {
   constructor(customerName: string, orderItems: OrderItem[]) {
     this.customerName = customerName;
     this.orderItems = orderItems;
+
+    this.status = OrderStatus.CART;
   }
 
   @CreateDateColumn()
@@ -37,6 +40,12 @@ export class Order {
   @Column({ nullable: true })
   shippingAddressSetAt: Date | null;
 
+  @Column()
+  status: OrderStatus;
+
+  @Column()
+  paidAt: Date | null;
+
   getOrderTotalPrice(): number {
     return this.orderItems.reduce(
       (totalPrice, orderItem) => totalPrice + orderItem.getTotalPrice(),
@@ -57,5 +66,14 @@ export class Order {
 
     this.shippingAddress = shippingAddress;
     this.shippingAddressSetAt = new Date();
+  }
+
+  pay() {
+    if (this.status !== OrderStatus.SHIPPING_ADDRESS_SET) {
+      throw new Error('You have to select a shipping adress');
+    }
+
+    this.status = OrderStatus.PAID;
+    this.paidAt = new Date();
   }
 }
