@@ -1,13 +1,15 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { OrderRepositoryInterface } from 'src/order/domain/port/order.repository.interface';
-import { CreateOrderService } from 'src/order/domain/use-case/create-order.service';
-import OrderRepository from 'src/order/infrastructure/order.repository';
-import OrderController from 'src/order/presentation/order.controller';
-@Module({
-  imports: [TypeOrmModule.forFeature([])],
-  controllers: [OrderController],
+import OrderRepository from './infrastructure/order.repository';
+import OrderController from './presentation/order.controller';
+import { CreateOrderService } from './domain/use-case/create-order.service';
+import { OrderRepositoryInterface } from './domain/port/order.repository.interface';
+import { Order } from './domain/entity/order.entity';
+import { OrderItem } from './domain/entity/order-item.entity';
 
+@Module({
+  imports: [TypeOrmModule.forFeature([Order, OrderItem])],
+  controllers: [OrderController],
   providers: [
     {
       provide: 'OrderRepositoryInterface',

@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { OrderModule } from './order/order.module';
+import { Order } from './order/domain/entity/order.entity';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { OrderModule } from './order/order.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: [Order],
       synchronize: true,
       autoLoadEntities: true,
     }),

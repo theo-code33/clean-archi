@@ -1,5 +1,5 @@
-import { OrderItem } from 'src/order/domain/entity/order-item.entity';
-import { OrderStatus } from 'src/order/domain/enum/order-status.enum';
+import { OrderItem } from '../entity/order-item.entity';
+import { OrderStatus } from '../enum/order-status.enum';
 import {
   Column,
   CreateDateColumn,
