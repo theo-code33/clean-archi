@@ -10,10 +10,6 @@ describe('Paid Order Service', () => {
     findById() {
       return order;
     },
-    update(order: Order) {
-      order.status = OrderStatus.SHIPPING_ADDRESS_SET;
-      return order;
-    },
     save(order: Order) {
       return order;
     },
