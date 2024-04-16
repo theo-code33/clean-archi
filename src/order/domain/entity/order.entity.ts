@@ -21,7 +21,7 @@ export class Order {
   createdAt: Date;
 
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
   price: number;
