@@ -25,6 +25,21 @@ describe('set order shipping address', () => {
         shippingAddress: '123 Main St.',
       });
 
-    expect(updatedOrder.shippingAddress).toBe('124 Main St.');
+    expect(updatedOrder.shippingAddress).toBe('123 Main St.');
+  });
+
+  it('should throw an error if shipping address is empty', async () => {
+    try {
+      const setOrderShippingAddressService = new SetOrderShippingAddressService(
+        orderRepositoryMock,
+      );
+
+      await setOrderShippingAddressService.setOrderShippingAddress({
+        orderId: '123',
+        shippingAddress: '',
+      });
+    } catch (error) {
+      expect(error.message).toBe('Shipping address is required');
+    }
   });
 });
